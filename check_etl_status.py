@@ -47,6 +47,7 @@ if helium_explorer_height.status_code == 200:
 else:
     helium_height = "N/A"
 
-webhook = DiscordWebhook(url=DISCORD_URL, content=f'Helium Blocks: {helium_height} | Emrit ETL Blocks: {etl_height}')
-response = webhook.execute()
+if helium_height - etl_height >= 10:
+    webhook = DiscordWebhook(url=DISCORD_URL, content=f'Helium Blocks: {helium_height} | Emrit ETL Blocks: {etl_height}')
+    response = webhook.execute()
 
